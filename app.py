@@ -9,13 +9,7 @@ import json
 
 
 # postgresURI = 'postgresql://postgres:password@localhost/trade_revised'
-postgresURI = 'postgresql://postgres_master:DAXNq5My75bYXcYUAglj@trade-database.cwpd4dneht3a.us-east-2.rds.amazonaws.com:5432/postgres'
-
-
-# AWS DB information 
-#
-# Master username: postgres_master
-# Master password: DAXNq5My75bYXcYUAglj
+# postgresURI = 'postgresql://postgres_master:DAXNq5My75bYXcYUAglj@trade-database.cwpd4dneht3a.us-east-2.rds.amazonaws.com:5432/postgres'
 
 
 # Instantiate the DB connection.
