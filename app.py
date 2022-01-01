@@ -13,10 +13,10 @@ import json
 
 
 # Instantiate the DB connection.
-application = Flask(__name__)
+app = Flask(__name__)
 
-# application.config["SQLALCHEMY_DATABASE_URI"] = postgresURI
-# db = SQLAlchemy(application)
+# app.config["SQLALCHEMY_DATABASE_URI"] = postgresURI
+# db = SQLAlchemy(app)
 # Base = automap_base()
 
 # Base.prepare(db.engine, reflect=True)
@@ -69,7 +69,7 @@ application = Flask(__name__)
 #     main_dict.append(data)
 
 
-@application.route("/")
+@app.route("/")
 def index():
 
     # csv_file = 'exported_csv_file.csv'
@@ -111,5 +111,5 @@ def index():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    application.debug=True
-    application.run()
+    app.debug=True
+    app.run()
