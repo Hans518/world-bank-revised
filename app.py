@@ -75,7 +75,7 @@ for row in trade_query:
     main_dict.append(data)
 
 
-@app.route("/")
+@application.route("/")
 def index():
 
     # csv_file = 'exported_csv_file.csv'
