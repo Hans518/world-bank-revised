@@ -10,63 +10,65 @@ import json
 
 # postgresURI = 'postgresql://postgres:password@localhost/trade_revised'
 # postgresURI = 'postgresql://postgres_master:DAXNq5My75bYXcYUAglj@trade-database.cwpd4dneht3a.us-east-2.rds.amazonaws.com:5432/postgres'
+postgresURI = 'postgres://vswowazizkuhyv:91dc72340c68ae79e2cc00e815d66d4fdc07815ee315ffd9a4742a98a23cb684@ec2-3-212-172-25.compute-1.amazonaws.com:5432/ddb6iugdiltagl'
+
 
 
 # Instantiate the DB connection.
 app = Flask(__name__)
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = postgresURI
-# db = SQLAlchemy(app)
-# Base = automap_base()
+app.config["SQLALCHEMY_DATABASE_URI"] = postgresURI
+db = SQLAlchemy(app)
+Base = automap_base()
 
-# Base.prepare(db.engine, reflect=True)
-# Base.classes.keys()
+Base.prepare(db.engine, reflect=True)
+Base.classes.keys()
 
-# # A basic query getting everything in the table
-# tradeData = Base.classes.trade_table
-# trade_query = db.session.query(tradeData.reporter_name,
-#                      tradeData.trade_flow,
-#                      tradeData.partner_name,
-#                      tradeData.product_group,
-#                      tradeData.trade_indicator,
-#                      tradeData.y_2008,
-#                      tradeData.y_2009,
-#                      tradeData.y_2010,
-#                      tradeData.y_2011,
-#                      tradeData.y_2012,
-#                      tradeData.y_2013,
-#                      tradeData.y_2014,
-#                      tradeData.y_2015,
-#                      tradeData.y_2016,
-#                      tradeData.y_2017,
-#                      tradeData.y_2018)
+# A basic query getting everything in the table
+tradeData = Base.classes.trade_table
+trade_query = db.session.query(tradeData.reporter_name,
+                     tradeData.trade_flow,
+                     tradeData.partner_name,
+                     tradeData.product_group,
+                     tradeData.trade_indicator,
+                     tradeData.y_2008,
+                     tradeData.y_2009,
+                     tradeData.y_2010,
+                     tradeData.y_2011,
+                     tradeData.y_2012,
+                     tradeData.y_2013,
+                     tradeData.y_2014,
+                     tradeData.y_2015,
+                     tradeData.y_2016,
+                     tradeData.y_2017,
+                     tradeData.y_2018)
 
-# # Close the connection after query
-# db.session.close()
+# Close the connection after query
+db.session.close()
 
-# # Creating a dictionary to be used as a json object in javascript
-# main_dict = []
+# Creating a dictionary to be used as a json object in javascript
+main_dict = []
 
-# for row in trade_query:
-#     data = {'Reporter':row[0],
-#             "trade_flow":row[1],
-#             "Partner":row[2],
-#             "product group":row[3],
-#             "indicator":row[4],
-#             "activity":
-#                         {"2008":float(row[5]),
-#                         "2009":float(row[6]),
-#                         "2010":float(row[7]),
-#                         "2011":float(row[8]),
-#                         "2012":float(row[9]),
-#                         "2013":float(row[10]),
-#                         "2014":float(row[11]),
-#                         "2015":float(row[12]),
-#                         "2016":float(row[13]),
-#                         "2017":float(row[14]),
-#                         "2018":float(row[15])}
-#     }
-#     main_dict.append(data)
+for row in trade_query:
+    data = {'Reporter':row[0],
+            "trade_flow":row[1],
+            "Partner":row[2],
+            "product group":row[3],
+            "indicator":row[4],
+            "activity":
+                        {"2008":float(row[5]),
+                        "2009":float(row[6]),
+                        "2010":float(row[7]),
+                        "2011":float(row[8]),
+                        "2012":float(row[9]),
+                        "2013":float(row[10]),
+                        "2014":float(row[11]),
+                        "2015":float(row[12]),
+                        "2016":float(row[13]),
+                        "2017":float(row[14]),
+                        "2018":float(row[15])}
+    }
+    main_dict.append(data)
 
 
 @app.route("/")
@@ -108,7 +110,7 @@ def index():
     #         main_dict.append(dict)
 
     # print(main_dict)
-    return render_template('index.html')
+    return render_template('index.html', data=main_dict)
 
 if __name__ == "__main__":
     app.debug=True
